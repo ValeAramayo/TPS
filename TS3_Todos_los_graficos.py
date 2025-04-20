@@ -97,4 +97,5 @@ def simular_efecto_cuantizacion(kn, B):
 # Llamadas a la función con distintos parámetros
 simular_efecto_cuantizacion(kn=0.1, B=4)
 simular_efecto_cuantizacion(kn=1, B=8)
+simular_efecto_cuantizacion(kn=1, B=16)
 simular_efecto_cuantizacion(kn=10, B=16)

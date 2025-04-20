@@ -130,9 +130,6 @@ plt.tight_layout()
 plt.show()
 
 
-
-
-#
 #FETEAR LA MUESTRA n/4
 
 final_fft_1=1/N*np.fft.fft(xk_con_ventana,axis=0)
@@ -151,8 +148,6 @@ A_GORRO = np.array([a_gorro_1, a_gorro_2, a_gorro_3])  # También da (3, 200)
 
 # Etiquetas para cada conjunto
 labels = ['Blackman-Harris', 'Flattop', 'Boxcar']
-
-
 # Graficar los 3 histogramas superpuestos
 plt.figure(1)
 plt.hist(a_gorro_1, bins=30, label='Blackman-Harris', color='blue', alpha=0.6)
@@ -161,28 +156,26 @@ plt.hist(a_gorro_3, bins=30, label='Boxcar', color='red', alpha=0.6)
 
 
 plt.title('Histogramas de Magnitud FFT (una por ventana)')
-plt.xlabel('Magnitud')
+plt.xlabel('Amplitud')
 plt.ylabel('Frecuencia')
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
+
 #
-# E1= np.mean(a_gorro_1) #esperanza
-# E2= np.mean(a_gorro_2)
-# E3= np.mean(a_gorro_3)
+sesgo1_amplitud= np.mean(a_gorro_1) - a1 
+sesgo2_amplitud= np.mean(a_gorro_2) - a1
+sesgo3_amplitud= np.mean(a_gorro_3) - a1
 
-# #
-# sesgo1= E1 - a1 
-# sesgo2= E2 - a1
-# sesgo3=E3 - a1
-
-# V1= np.var(a_gorro_1) #varianza
-# V2= np.var(a_gorro_2)
-# V3= np.var(a_gorro_3)
+# Varianza
+V1_amplitud= np.var(a_gorro_1) 
+V2_amplitud= np.var(a_gorro_2)
+V3_amplitud= np.var(a_gorro_3)
 
 
 
 #
-#Estimador_omega1= np.argmax(np.abs(), axis=0, )
+
 
