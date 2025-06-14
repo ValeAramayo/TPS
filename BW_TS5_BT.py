@@ -10,7 +10,9 @@ from scipy import signal as sig
 import matplotlib.pyplot as plt
 import scipy.io as sio
 from scipy.io.wavfile import write, read
+# %%
 import pandas as pd
+
 
 def vertical_flaten(a):
     return a.reshape(a.shape[0],1)
@@ -128,12 +130,7 @@ psd_s_ecg, ff_s_ecg, f_95_s_ecg, f_98_s_ecg, energia_tot_s_ecg, energia_acum_s_e
 # Lectura de audio #
 ####################
 
-fs_audio, wav_data = read('la cucaracha.wav')
-if wav_data.ndim > 1:
-    wav_data = wav_data[:, 0]
-wav_data = wav_data.astype(np.float64)
-psd_cuca, ff_cuca, f_95_cuca, f_98_cuca, energia_tot_cuca, energia_acum_cuca = procesar_señal(wav_data, fs_audio, titulo="La cucaracha")
-
+     
 fs_audio2, wav_data2 = read('prueba psd.wav')
 if wav_data2.ndim > 1:
     wav_data2 = wav_data2[:, 0]
