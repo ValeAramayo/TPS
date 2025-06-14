@@ -107,7 +107,9 @@ for s in negativos:
     plt.plot(t, s, color='deepskyblue', alpha=0.5)
 
 # Promedio general
-plt.plot(t, np.mean(segmentos_detectados, axis=0), color='black', label='Promedio', linewidth=2)
+plt.plot(t, np.mean(positivos, axis=0), color='red', label='Promedio Ventriculares', linewidth=2)
+plt.plot(t, np.mean(negativos, axis=0), color='blue', label='Promedio Normales', linewidth=2)
+
 plt.title("Latidos separados por polaridad")
 plt.xlabel("Tiempo (ms)")
 plt.ylabel("Amplitud (normalizada)")
