@@ -30,12 +30,16 @@ corr_norm = sig.correlate(ecg_filtrada_norm, qrs_pattern_norm, mode='same')
 ecg_rescaled = ecg_filtrada_norm / np.max(np.abs(ecg_filtrada_norm))
 corr_rescaled = corr_norm / np.max(np.abs(corr_norm))
 
+# %%
 # Paso 4: Detección de picos en la correlación reescalada
+
 threshold = 0.25  # Umbral relativo al máximo
 peaks, properties = find_peaks(corr_rescaled, height=threshold, distance=200)
  
 t_ecg=np.arange(len(corr_rescaled))/fs
+# %%
 # Paso 5: Gráfico conjunto
+
 plt.figure(figsize=(14, 5))
 plt.plot(t_ecg, ecg_rescaled, label='ECG filtrado (normalizado)', alpha=0.7)
 plt.plot(t_ecg, corr_rescaled, label='Correlación normalizada (reescalada)', alpha=0.7)
@@ -48,7 +52,7 @@ plt.show()
 # %%
 
 # VER LATIDOS SUPERPUESTOS CON QRS DETECTADO EN MAT STRUCT
-# Paso 5: Comparación de latidos superpuestos
+# Paso 6: Comparación de latidos superpuestos
 
 pre = 250  # muestras antes del QRS
 post = 350  # muestras después
