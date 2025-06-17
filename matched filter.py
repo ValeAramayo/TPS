@@ -41,14 +41,61 @@ t_ecg=np.arange(len(corr_rescaled))/fs
 # Paso 5: Gráfico conjunto
 
 plt.figure(figsize=(14, 5))
-plt.plot(t_ecg, ecg_rescaled, label='ECG filtrado (normalizado)', alpha=0.7)
-plt.plot(t_ecg, corr_rescaled, label='Correlación normalizada (reescalada)', alpha=0.7)
+plt.plot(t_ecg, ecg_rescaled, label='ECG (normalizado)', alpha=1, color='black')
+plt.plot(t_ecg, corr_rescaled, label='Correlación normalizada (reescalada)', alpha=0.5, color='purple')
 plt.plot(t_ecg[peaks], corr_rescaled[peaks], 'rx', label='Picos de correlación')
 plt.title('ECG filtrado vs Correlación (con detección de picos)')
 plt.xlabel("Tiempo [s]")
 plt.ylabel("Amplitud escalada")
 plt.grid(True)
 plt.show()
+# %%
+# Paso 5: Gráfico conjunto cierto intervalo
+
+plt.figure(figsize=(14, 5))
+plt.plot(t_ecg, ecg_rescaled, label='ECG (normalizado)', alpha=0.7, color='black')
+plt.plot(t_ecg, corr_rescaled, label='Correlación normalizada (reescalada)', alpha=1, color='purple')
+plt.plot(t_ecg[peaks], corr_rescaled[peaks], 'bd', label='Picos de correlación')
+plt.title('ECG filtrado vs Correlación (con detección de picos)')
+plt.xlim([400, 410])
+plt.xlabel("Tiempo [s]")
+plt.ylabel("Amplitud escalada")
+plt.legend()
+plt.grid(True)
+plt.show()
+# %%
+# Paso 5: Gráfico conjunto cierto intervalo
+
+plt.figure(figsize=(14, 5))
+plt.plot(t_ecg, ecg_rescaled, label='ECG (normalizado)', alpha=1, color='black')
+plt.plot(t_ecg, corr_rescaled, label='Correlación normalizada (reescalada)', alpha=0.5, color='purple')
+plt.plot(t_ecg[peaks], ecg_rescaled[peaks], 'bx', label='Detección de latido con matcher filter')
+plt.plot(t_ecg[qrs_indices], ecg_rescaled[qrs_indices], 'bo', label='Detección de latido con qrs detections')
+plt.title('ECG filtrado vs Correlación (con detección de picos)')
+plt.xlim([400, 405])
+plt.xlabel("Tiempo [s]")
+plt.ylabel("Amplitud escalada")
+plt.legend()
+plt.grid(True)
+plt.show()
+# %%
+# Tolerancia en muestras para considerar que un latido fue detectado correctamente
+tolerancia = 100 #100 muestras=100ms
+
+# Contador de coincidencias
+coincidencias = 0
+
+# Recorremos los latidos detectados por correlación
+for p in peaks:
+    # Si hay al menos un qrs en el archivo cerca de este latido detectado, se cuenta como coincidencia
+    if np.any(np.abs(qrs_indices - p) <= tolerancia):
+        coincidencias += 1
+
+# Proporción de detecciones correctas respecto al total de latidos del archivo
+proporcion_detectados = coincidencias / len(qrs_indices)
+print(f"Proporción de detecciones correctas (matcher vs archivo): {proporcion_detectados:.2%}")
+
+
 # %%
 
 # VER LATIDOS SUPERPUESTOS CON QRS DETECTADO EN MAT STRUCT
@@ -121,4 +168,4 @@ plt.grid(True)
 plt.legend()
 plt.show()
 # %%
-# VER LATIDOS SUPERPUESTOS CON QRS DETECTADO EN MAT STRUCT
+
