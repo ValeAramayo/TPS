@@ -98,7 +98,7 @@ sos2=sig.iirdesign(fpass,fstop, ripple, atenuacion, ftype=aprox_name, output='so
 npoints = 400
 w_rad= np.append(np.logspace(-2, 0.8, 500), np.logspace(0.9, 1.6, 500)) 
 w_rad= np.append(w_rad, np.linspace(20, nyquist, 200, endpoint=True))/ (nyquist* np.pi)
-# esto mejoro la resolucion en la subir de 0 a 2 
+# esto mejoro la resolucion en la subir de 0 a 2 +
 w, hh = sig.sosfreqz(sos2, worN=npoints)  
 plt.plot(w/np.pi*fs/2, 20*np.log10(np.abs(hh)+1e-15), label='sos2')  
 #1e-15 para no tener problemas de cero
@@ -110,7 +110,7 @@ plt.xlabel('Frecuencia normalizada a Nyq [#]')
 plt.ylabel('Amplitud [dB]')  
 plt.grid(which='both', axis='both')  
 # Cargar datos ppg
-ppg = np.genfromtxt('PPG.csv', delimiter=',', skip_header=1)
+ppg = np.genfromtxt('s01_ex01_s01.csv', delimiter=',', skip_header=1)
 
 # Plot señal original
 plt.figure()
